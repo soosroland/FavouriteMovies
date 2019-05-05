@@ -23,17 +23,14 @@ public class Movies {
         return this.Id;
     }
 
-    @NonNull
     public String getTitle() {
         return this.Title;
     }
 
-    @NonNull
     public Integer getYear() {
         return this.Year;
     }
 
-    @NonNull
     public Double getRating() { return this.Rating; }
 
     public void setTitle(String title) {

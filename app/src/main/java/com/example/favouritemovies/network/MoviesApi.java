@@ -19,12 +19,11 @@ public interface MoviesApi {
      * Returns list of movies
      * @return Call<Movie>
      */
+
     @GET("movie")
-    Call<MoviesResult> getMovies(@Header("Authorization") String authorisation,
-                                         @Query("Id") Integer Id,
-                                         @Query("Title") String title,
-                                         @Query("Year") Integer year,
-                                         @Query("Rating") int offset);
+    Call<Movies> getMovies();
+
+
 
     /**
      * Add a new movie to the list
@@ -34,7 +33,7 @@ public interface MoviesApi {
      */
 
     @POST("movie")
-    Call<MoviesResult> addMovie(
+    Call<Void> addMovie(
             @Body Movies body
     );
 
@@ -47,8 +46,8 @@ public interface MoviesApi {
      */
 
     @GET("movie/{movieId}")
-    Call<MoviesResult> getMovieById(
-            @Path("movieId") Integer movieId
+    Call<Movies> getMovieById(
+            @Path("movieId") Long movieId
     );
 
 
@@ -61,7 +60,7 @@ public interface MoviesApi {
      */
 
     @PUT("movie/{movieId}")
-    Call<MoviesResult> updateMovie(
+    Call<Void> updateMovie(
             @Path("movieId") Long movieId, @Body Movies body
     );
 
@@ -75,7 +74,7 @@ public interface MoviesApi {
      */
 
     @DELETE("movie/{movieId}")
-    Call<MoviesResult> deleteMovie(
+    Call<Void> deleteMovie(
             @Path("movieId") Long movieId, @Header("api_key") String apiKey
     );
 }
