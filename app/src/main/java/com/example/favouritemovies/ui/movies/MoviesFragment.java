@@ -1,7 +1,7 @@
 package com.example.favouritemovies.ui.movies;
 
 import android.content.ClipData;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import java.util.List;
 

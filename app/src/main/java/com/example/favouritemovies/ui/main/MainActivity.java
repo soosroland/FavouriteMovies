@@ -2,8 +2,8 @@ package com.example.favouritemovies.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.favouritemovies.ui.movies.MoviesActivity;
 
