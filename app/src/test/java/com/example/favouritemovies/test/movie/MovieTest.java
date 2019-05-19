@@ -35,15 +35,10 @@ public class MovieTest {
 
     @Test
     public void Create(){
-        moviePresenter.createMovie("Harry Potter and the Philosopher's",2005, 8.1, false);
+        moviePresenter.createMovie("Harry Potter and the Philosopher's stone",2005, 8.1, false);
         verify(movieScreen).forwardMovies();
     }
 
-    @Test
-    public void CreateWithNoTitle(){
-        moviePresenter.createMovie("",2005, 8.1, false);
-        verify(movieScreen).forwardMovies();
-    }
 
     @Test
     public void Cancel(){
