@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.crashlytics.android.Crashlytics;
 import com.example.favouritemovies.MovieApplication;
 import com.example.favouritemovies.R;
 import com.example.favouritemovies.ui.movies.MoviesActivity;
@@ -42,6 +43,9 @@ public class MovieActivity extends AppCompatActivity implements MovieScreen, Nav
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // TODO: Move this to where you establish a user session
+        logUser();
+
         setContentView(R.layout.activity_movie);
         MovieApplication.injector.inject(this);
 
@@ -105,6 +109,15 @@ public class MovieActivity extends AppCompatActivity implements MovieScreen, Nav
         });
     }
 
+    private void logUser() {
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+        Crashlytics.setUserIdentifier("12345");
+        Crashlytics.setUserEmail("user@fabric.io");
+        Crashlytics.setUserName("Test User");
+    }
+
+
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -156,4 +169,9 @@ public class MovieActivity extends AppCompatActivity implements MovieScreen, Nav
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void forceCrash(View view) {
+        throw new RuntimeException("This is a crash");
+    }
+
 }

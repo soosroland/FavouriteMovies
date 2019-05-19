@@ -3,8 +3,10 @@ package com.example.favouritemovies;
 import android.app.Application;
 import android.provider.Settings;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.favouritemovies.persistence.RoomModule;
 import com.example.favouritemovies.ui.UIModule;
+import io.fabric.sdk.android.Fabric;
 
 public class MovieApplication extends Application {
 
@@ -14,6 +16,7 @@ public class MovieApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
         injector =
