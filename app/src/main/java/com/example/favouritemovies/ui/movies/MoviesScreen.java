@@ -1,12 +1,16 @@
 package com.example.favouritemovies.ui.movies;
 
 
-import android.content.ClipData;
+import com.example.favouritemovies.model.MovieDto;
 
 import java.util.List;
 
 public interface MoviesScreen {
-    void showArtists(List<ClipData.Item> artists);
+    void showMovies(List<MovieDto> movieDtoList);
 
-    void showNetworkError(String errorMsg);
+    void showNetworkError(String message);
+
+    void showMessage(String message);
+
+    void remove(MovieDto movieDto);
 }

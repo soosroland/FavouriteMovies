@@ -1,7 +1,8 @@
 package com.example.favouritemovies.network;
 
-import com.example.favouritemovies.model.Movies;
-import com.example.favouritemovies.model.MoviesResult;
+import com.example.favouritemovies.model.MovieDto;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -11,9 +12,8 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
-public interface MoviesApi {
+public interface MovieApi {
     /**
      * Lists movies
      * Returns list of movies
@@ -21,7 +21,9 @@ public interface MoviesApi {
      */
 
     @GET("movie")
-    Call<Movies> getMovies();
+    Call<List<MovieDto>> getMovies(
+            @Header("movieId") String movieId
+    );
 
 
 
@@ -34,7 +36,7 @@ public interface MoviesApi {
 
     @POST("movie")
     Call<Void> addMovie(
-            @Body Movies body
+            @Body MovieDto body, @Header("movieId") String movieId
     );
 
 
@@ -44,12 +46,12 @@ public interface MoviesApi {
      * @param movieId ID of movie to return
      * @return Call<Movie>
      */
-
+/*
     @GET("movie/{movieId}")
-    Call<Movies> getMovieById(
+    Call<MovieDto> getMovieById(
             @Path("movieId") Long movieId
     );
-
+*/
 
     /**
      * Update an existing movie
@@ -59,9 +61,9 @@ public interface MoviesApi {
      * @return Call<Void>
      */
 
-    @PUT("movie/{movieId}")
+    @PUT("movie")
     Call<Void> updateMovie(
-            @Path("movieId") Long movieId, @Body Movies body
+        @Body MovieDto body, @Header("movieId") String movieId
     );
 
 
@@ -69,12 +71,12 @@ public interface MoviesApi {
      * Deletes a movie
      *
      * @param movieId Movie id to delete
-     * @param apiKey
+     * @param deviceId
      * @return Call<Void>
      */
 
     @DELETE("movie/{movieId}")
     Call<Void> deleteMovie(
-            @Path("movieId") Long movieId, @Header("api_key") String apiKey
+            @Header("deviceId") String deviceId, @Path("movieId") Long movieId
     );
 }

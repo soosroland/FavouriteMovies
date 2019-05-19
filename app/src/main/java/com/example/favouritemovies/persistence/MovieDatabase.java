@@ -1,32 +1,34 @@
-package com.example.favouritemovies.model;
+package com.example.favouritemovies.persistence;
 
-import androidx.sqlite.db.SupportSQLiteDatabase;
-import androidx.room.Database;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
+
+import android.arch.persistence.db.SupportSQLiteDatabase;
+import android.arch.persistence.room.Database;
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 
-/**
- * This is the backend. The database. This used to be done by the OpenHelper.
- * The fact that this has very few comments emphasizes its coolness.
- */
+import com.example.favouritemovies.model.MovieDto;
+import com.example.favouritemovies.persistence.dao.MovieDao;
 
-@Database(entities = {Movies.class}, version = 1)
-public abstract class MoviesRoomDatabase extends RoomDatabase {
 
-    public abstract MoviesDao moviesDao();
+@Database(entities = {MovieDto.class}, version = 1)
+public abstract class MovieDatabase extends RoomDatabase {
+
+    public abstract MovieDao getMovieDao();
+
 
     // marking the instance as volatile to ensure atomic access to the variable
-    private static volatile MoviesRoomDatabase INSTANCE;
+    private static volatile MovieDatabase INSTANCE;
 
-    static MoviesRoomDatabase getDatabase(final Context context) {
+
+    public static MovieDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (MoviesRoomDatabase.class) {
+            synchronized (MovieDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            MoviesRoomDatabase.class, "word_database")
+                            MovieDatabase.class, "movie.db")
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
                             .fallbackToDestructiveMigration()
@@ -41,7 +43,7 @@ public abstract class MoviesRoomDatabase extends RoomDatabase {
     /**
      * Override the onOpen method to populate the database.
      * For this sample, we clear the database every time it is created or opened.
-     * <p>
+     *
      * If you want to populate the database only when the database is created for the 1st time,
      * override RoomDatabase.Callback()#onCreate
      */
@@ -62,29 +64,33 @@ public abstract class MoviesRoomDatabase extends RoomDatabase {
      */
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
-        private final MoviesDao mDao;
+        private final MovieDao tDao;
 
-        PopulateDbAsync(MoviesRoomDatabase db) {
-            mDao = db.moviesDao();
+        PopulateDbAsync(MovieDatabase db) {
+            tDao = db.getMovieDao();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
-            // Start the app with a clean database every time.
-            // Not needed if you only populate on creation.
-            mDao.deleteAll();
+            tDao.deleteAll();
 
-            Movies movies = new Movies("1");
-            movies.setTitle("Harry Potter and the Philosopher's Stone");
-            movies.setYear(1997);
-            movies.setRating(8.8);
-            mDao.insert(movies);
-            movies = new Movies("2");
-            movies.setTitle("Harry Potter and the Chamber of Secrets");
-            movies.setYear(1999);
-            movies.setRating(8.9);
-            mDao.insert(movies);
+            MovieDto movie = new MovieDto();
+            long id=0;
+            movie.setId(id);
+            movie.setTitle("Harry Potter 1");
+            movie.setYear(1997);
+            movie.setRating(9.1);
+            tDao.insert(movie);
+            id++;
+            movie.setId(id);
+            movie.setTitle("Harry Potter 2");
+            movie.setYear(1999);
+            movie.setRating(8.9);
+            tDao.insert(movie);
+
             return null;
         }
     }
+
+
 }
