@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.favouritemovies">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:usesCleartextTraffic="true"
         android:name=".MovieApplication"
@@ -25,16 +23,12 @@
         </activity>
         <activity
             android:name=".ui.movie.MovieActivity"
-            android:label="@string/title_todo_activity"
-            android:theme="@style/AppTheme_new.NoActionBar"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.about.AboutActivity"
-            android:label="@string/title_about_activity"
+            android:label="@string/title_movie_activity"
             android:theme="@style/AppTheme_new.NoActionBar"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
     </application>
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

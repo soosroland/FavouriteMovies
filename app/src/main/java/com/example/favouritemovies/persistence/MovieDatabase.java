@@ -54,7 +54,8 @@ public abstract class MovieDatabase extends RoomDatabase {
             super.onOpen(db);
             // If you want to keep the data through app restarts,
             // comment out the following line.
-            new PopulateDbAsync(INSTANCE).execute();
+
+            //new PopulateDbAsync(INSTANCE).execute();
         }
     };
 
@@ -74,7 +75,7 @@ public abstract class MovieDatabase extends RoomDatabase {
         protected Void doInBackground(final Void... params) {
             tDao.deleteAll();
 
-            MovieDto movie = new MovieDto();
+            /*MovieDto movie = new MovieDto();
             long id=0;
             movie.setId(id);
             movie.setTitle("Harry Potter 1");
@@ -86,7 +87,7 @@ public abstract class MovieDatabase extends RoomDatabase {
             movie.setTitle("Harry Potter 2");
             movie.setYear(1999);
             movie.setRating(8.9);
-            tDao.insert(movie);
+            tDao.insert(movie);*/
 
             return null;
         }

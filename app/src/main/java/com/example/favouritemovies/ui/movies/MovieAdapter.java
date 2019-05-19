@@ -40,8 +40,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MovieDto movieDto = movieDtoList.get(position);
         holder.tvTitle.setText(movieDto.getTitle());
-        holder.tvYear.setText(movieDto.getYear().toString());
-        holder.tvRating.setText(movieDto.getRating().toString());//movieDto.getIsDone());
+        holder.tvYear.setText("("+movieDto.getYear().toString()+")");
+        holder.tvRating.setText(movieDto.getRating().toString());
     }
 
     void setMovis(List<MovieDto> movies) {

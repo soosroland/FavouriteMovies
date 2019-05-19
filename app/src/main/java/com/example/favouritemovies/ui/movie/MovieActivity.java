@@ -148,7 +148,7 @@ public class MovieActivity extends AppCompatActivity implements MovieScreen, Nav
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
-        if (id == R.id.nav_todos) {
+        if (id == R.id.nav_movies) {
             Intent intent = new Intent(MovieActivity.this, MovieActivity.class);
             startActivity(intent);
         }
